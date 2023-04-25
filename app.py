@@ -33,4 +33,4 @@ if st.button("Have a go!"):
 
     ax.scatter([0], [0], s=50, c='r', marker='x')
 
-st.pyplot(fig)
+    st.pyplot(fig)
