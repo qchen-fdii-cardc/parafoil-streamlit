@@ -2,7 +2,7 @@ from parafoil.utils import max_rand_vec
 from typing import Iterable
 import numpy as np
 from parafoil.parafoil import Parafoil
-from control import ControlStrategy
+from parafoil.control import ControlStrategy
 
 import scipy.interpolate as itp
 
