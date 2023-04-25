@@ -13,21 +13,24 @@ Parafoil Dynamics for Fun
     by Qin Chen, Xing-long Gao
 """
 
-p = Parafoil(450, 450, 9.0, 7.0, 1200.0, np.deg2rad(-15.0))
 
-# p.strategy = HomingStrategy(0.1)
-d_omega = np.deg2rad(15.0)
-# p.strategy = RandomCollocationStrategy(d_omega, 10)
-p.strategy = FitCollocationStrategy(*max_rand_vec(d_omega, 25))
-# p.strategy = HomingStrategy(d_omega)
+if st.button("Flight a parafoil!"):
+    p = Parafoil(450, 450, 9.0, 7.0, 1200.0, np.deg2rad(-15.0))
 
-h = p.simulate(1000)
+    # p.strategy = HomingStrategy(0.1)
+    d_omega = np.deg2rad(10.0)
+    # p.strategy = RandomCollocationStrategy(d_omega, 10)
+    p.strategy = FitCollocationStrategy(*max_rand_vec(d_omega, 25))
+    # p.strategy = HomingStrategy(d_omega)
 
-st.text("Welcome and have fun!")
+    h = p.simulate(500)
 
-fig = plt.figure()
-ax = fig.gca()
+    fig = plt.figure()
+    ax = fig.gca()
 
-ax.scatter([h(t)[0][0] for t in h.time_range], [h(t)[0][1] for t in h.time_range], s=1)
+    ax.scatter([h(t)[0][0] for t in h.time_range], [h(t)[0][1] for t in h.time_range], s=1)
+    ax.scatter(h(0)[0][0], h(0)[0][1], s=50, c='g')
 
-st.pyplot(fig)
+    ax.scatter([0], [0], s=10, c='r', marker='x')
+
+    st.pyplot(fig)
