@@ -20,11 +20,8 @@ n_collocation_points = st.slider("Number of collocation points", 5, 100, 25, 1)
 if st.button("Have a go!"):
     p = Parafoil(450, 450, 9.0, 7.0, 1200.0, np.deg2rad(omega_0_deg))
 
-    # p.strategy = HomingStrategy(0.1)
     d_omega = np.deg2rad(d_omega_deg)
-    # p.strategy = RandomCollocationStrategy(d_omega, 10)
     p.strategy = FitCollocationStrategy(*max_rand_vec(d_omega, n_collocation_points))
-    # p.strategy = HomingStrategy(d_omega)
 
     h = p.simulate(500)
 
@@ -36,4 +33,4 @@ if st.button("Have a go!"):
 
     ax.scatter([0], [0], s=50, c='r', marker='x')
 
-    st.pyplot(fig)
+st.pyplot(fig)
