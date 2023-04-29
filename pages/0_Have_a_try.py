@@ -8,9 +8,9 @@ from parafoil.utils import max_rand_vec
 
 
 st.sidebar.markdown("""
-    # 4-DOF Parafoil Dynamics
-    # Random collocation control strategy
-    # No wind model
+    - 4-DOF Parafoil Dynamics
+    - Random collocation control strategy
+    - No wind model
     """)
 
 d_omega_deg = st.slider("Maximum control input (°/s)", 5.0, 20.0, 10.0, 1.0)

@@ -6,8 +6,6 @@ st.sidebar.markdown("""
     """)
 
 st.markdown("""
-            
-            
-            # Parafoil Dynamics for Fun
-            ## by Qin Chen, Xing-long Gao
+            - Parafoil Dynamics for Fun
+            - by Qin Chen, Xing-long Gao
             """)

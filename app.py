@@ -46,5 +46,6 @@ No wind model applied currently.
 """
 
 st.sidebar.markdown("""
-    Parafoil dynamics app
+    - Parafoil dynamics app
+    - Theory and basic information
     """)
