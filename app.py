@@ -1,36 +1,54 @@
-import matplotlib.pyplot as plt
-import numpy as np
+# app main entry
+
 import streamlit as st
 
-from parafoil.collocation import FitCollocationStrategy
-from parafoil.parafoil import Parafoil
-from parafoil.utils import max_rand_vec
 
 """
 Parafoil Dynamics for Fun
 =====================
 
-    by Qin Chen, Xing-long Gao
+    by Qin Chen, Xing-long Gao    
+
+Dynamics{@parafoil}
+=====================
+
+Parafoil dynamics is fascinating. It is a nonlinear system with a lot of interesting properties.
+
+We start from 4-DOF equations of motion:
 """
 
-d_omega_deg = st.slider("Maximum control input (°/s)", 5.0, 20.0, 10.0, 1.0)
-omega_0_deg = st.slider("Initial flight angle (°)", -180.0, 180.0, -15.0, 5.0)
-n_collocation_points = st.slider("Number of collocation points", 5, 100, 25, 1)
+st.latex(r"""
+\left\{
+\begin{aligned}
+\dot{x} &= v \cos \omega \\
+\dot{y} &= v \sin \omega \\
+\dot{\omega} &= u \\
+\dot{v} &= -g \sin \gamma - \frac{1}{2m} \rho v^2 S C_D
+\end{aligned}
+\right.
+""")
 
-if st.button("Have a go!"):
-    p = Parafoil(450, 450, 9.0, 7.0, 1200.0, np.deg2rad(omega_0_deg))
+"""
+Current Control{@control}
+=====================
 
-    d_omega = np.deg2rad(d_omega_deg)
-    p.strategy = FitCollocationStrategy(*max_rand_vec(d_omega, n_collocation_points))
+The current control strategy is a simple interpolated collocation control strategy. 
+The control input is a piecewise linear function of flight angle error. The control input is limited to a maximum value. 
+The control input is interpolated from a set of collocation points. 
+The collocation points are generated randomly within the maximum control input. The number of collocation points is adjustable.
+"""
 
-    h = p.simulate(500)
+"""
+Wind Model{@wind}
+=====================
 
-    fig = plt.figure()
-    ax = fig.gca()
+No wind model applied currently.
+"""
 
-    ax.scatter([h(t)[0][0] for t in h.time_range], [h(t)[0][1] for t in h.time_range], s=1)
-    ax.scatter(h(0)[0][0], h(0)[0][1], s=50, c='g')
-
-    ax.scatter([0], [0], s=50, c='r', marker='x')
-
-    st.pyplot(fig)
+st.sidebar.markdown("""
+    ## Navigation
+    - [Home](#)
+    - [Parafoil](#parafoil)
+    - [Control](#control)
+    - [Wind](#wind)
+    """)

@@ -20,14 +20,30 @@ class Trajectory:
         return self.hist[t]
 
     @property
-    def time_range(self) -> Iterable:
+    def time(self) -> Iterable:
         return self.hist.keys()
+
+    @property
+    def y(self) -> Iterable:
+        return np.vstack([self(t)[0] for t in self.time])
+
+    @property
+    def dydt(self) -> Iterable:
+        return np.vstack([self(t)[1] for t in self.time])
+
+    @property
+    def height(self) -> Iterable:
+        return np.asarray([self(t)[2] for t in self.time])
+
+    @property
+    def u(self) -> Iterable:
+        return np.asarray([self(t)[3] for t in self.time])
 
     def show(self):
         time_str = time.strftime("%Y%m%d_%H%M%S", time.localtime())
         plt.figure()
-        plt.plot([self(t)[0][0] for t in self.time_range], [self(t)[0][1]
-                                                            for t in self.time_range])
+        plt.plot([self(t)[0][0] for t in self.time], [self(t)[0][1]
+                                                      for t in self.time])
         plt.xlabel("x(m)")
         plt.ylabel("y(m)")
         plt.grid(True)
@@ -48,15 +64,15 @@ class Trajectory:
 
         plt.clf()
         plt.subplot(211)
-        plt.plot(self.time_range, [self(t)[1][0] for t in self.time_range])
+        plt.plot(self.time, [self(t)[1][0] for t in self.time])
         plt.xlabel(r"t(s)")
         plt.ylabel(r"$v_x$(m/s)")
         plt.grid(True)
         plt.tight_layout()
 
         plt.subplot(212)
-        plt.plot(self.time_range, [self(t)[1][1]
-                                   for t in self.time_range])
+        plt.plot(self.time, [self(t)[1][1]
+                             for t in self.time])
         plt.xlabel(r"t(s)")
         plt.ylabel(r"$v_y$(m/s)")
         plt.grid(True)
@@ -65,15 +81,15 @@ class Trajectory:
 
         plt.clf()
         plt.subplot(211)
-        plt.plot(self.time_range, [np.rad2deg(self(t)[0][2])
-                 for t in self.time_range])
+        plt.plot(self.time, [np.rad2deg(self(t)[0][2])
+                             for t in self.time])
         plt.xlabel('t(s)')
         plt.ylabel(r'$\omega(^\circ)$')
         plt.grid(True)
 
         plt.subplot(212)
-        plt.plot(self.time_range, [np.rad2deg(self(t)[3])
-                 for t in self.time_range])
+        plt.plot(self.time, [np.rad2deg(self(t)[3])
+                             for t in self.time])
         plt.xlabel('t(s)')
         plt.ylabel(r'$\dot{\omega}(^\circ/s)$')
         plt.grid(True)
