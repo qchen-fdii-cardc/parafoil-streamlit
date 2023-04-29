@@ -46,9 +46,5 @@ No wind model applied currently.
 """
 
 st.sidebar.markdown("""
-    ## Navigation
-    - [Home](#)
-    - [Parafoil](#parafoil)
-    - [Control](#control)
-    - [Wind](#wind)
+    Parafoil dynamics app
     """)
