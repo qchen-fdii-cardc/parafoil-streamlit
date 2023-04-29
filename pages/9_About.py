@@ -2,9 +2,12 @@ import streamlit as st
 
 
 st.sidebar.markdown("""
-    ## Navigation
-    - [Home](#)
-    - [Parafoil](#parafoil)
-    - [Control](#control)
-    - [Wind](#wind)
+    # Parafoil Dynamics for Fun
     """)
+
+st.markdown("""
+            
+            
+            # Parafoil Dynamics for Fun
+            ## by Qin Chen, Xing-long Gao
+            """)
