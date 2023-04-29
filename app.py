@@ -9,7 +9,7 @@ Parafoil Dynamics for Fun
 
     by Qin Chen, Xing-long Gao    
 
-Dynamics{@parafoil}
+Dynamics{#parafoil}
 =====================
 
 Parafoil dynamics is fascinating. It is a nonlinear system with a lot of interesting properties.
@@ -29,7 +29,7 @@ st.latex(r"""
 """)
 
 """
-Current Control{@control}
+Control{#control}
 =====================
 
 The current control strategy is a simple interpolated collocation control strategy. 
@@ -39,7 +39,7 @@ The collocation points are generated randomly within the maximum control input. 
 """
 
 """
-Wind Model{@wind}
+Wind Model{#wind}
 =====================
 
 No wind model applied currently.
