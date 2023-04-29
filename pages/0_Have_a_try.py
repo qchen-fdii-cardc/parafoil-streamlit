@@ -6,6 +6,15 @@ from parafoil.collocation import FitCollocationStrategy
 from parafoil.parafoil import Parafoil
 from parafoil.utils import max_rand_vec
 
+
+st.sidebar.markdown("""
+    ## Navigation
+    - [Home](#)
+    - [Parafoil](#parafoil)
+    - [Control](#control)
+    - [Wind](#wind)
+    """)
+
 d_omega_deg = st.slider("Maximum control input (°/s)", 5.0, 20.0, 10.0, 1.0)
 omega_0_deg = st.slider("Initial flight angle (°)", -180.0, 180.0, -15.0, 5.0)
 n_collocation_points = st.slider("Number of collocation points", 5, 100, 25, 1)
