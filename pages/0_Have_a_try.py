@@ -63,4 +63,5 @@ if st.button("Have a go!"):
 
         st.pyplot(fig)
     with st.expander("Raw data"):
+        st.download_button("Download current data", data.to_csv().encode('utf-8'), 'parafoil.csv', 'text/csv')
         st.dataframe(data)
