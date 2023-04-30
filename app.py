@@ -2,7 +2,6 @@
 
 import streamlit as st
 
-
 """
 Parafoil Dynamics for Fun
 =====================
@@ -23,10 +22,14 @@ st.latex(r"""
 \dot{x} &= v \cos \omega \\
 \dot{y} &= v \sin \omega \\
 \dot{\omega} &= u \\
-\dot{v} &= -g \sin \gamma - \frac{1}{2m} \rho v^2 S C_D
+\dot{v_z} &= -g \sin \gamma - \frac{1}{2m} \rho v^2 S C_D
 \end{aligned}
 \right.
 """)
+
+"""
+Normally, pitch angle $\gamma$ and $C_D$ while be balanced to make $\dot{v_z} = 0$.
+"""
 
 """
 Control

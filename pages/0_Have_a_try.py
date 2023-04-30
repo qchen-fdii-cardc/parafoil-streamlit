@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
+import pandas as pd
 
 from parafoil.collocation import FitCollocationStrategy
 from parafoil.parafoil import Parafoil
 from parafoil.utils import max_rand_vec
-
 
 st.sidebar.markdown("""
     - 4-DOF Parafoil Dynamics
@@ -25,7 +25,11 @@ if st.button("Have a go!"):
 
     h = p.simulate(500)
 
-    # tab_xy, tab_omega = st.tabs(["Trajectory", "Flight angle"])
+    data = pd.DataFrame(np.vstack((h.time, h.y.T, h.dydt.T, h.height, h.u)).T,
+                        columns=['t', 'x', 'y', 'omega', 'dx', 'dy', 'domega', 'height', 'u'])
+
+    data.loc[:, 'omega'] = data.loc[:, 'omega'].apply(np.rad2deg)
+    data.loc[:, 'domega'] = data.loc[:, 'domega'].apply(np.rad2deg)
 
     tab_xy, tab_omega = st.columns(2)
     with tab_xy:
@@ -47,7 +51,7 @@ if st.button("Have a go!"):
 
     with tab_omega:
         fig = plt.figure()
-        axs = fig.subplots(nrows=2, ncols=1,sharex=True)
+        axs = fig.subplots(nrows=2, ncols=1, sharex=True)
 
         axs[0].plot(h.time, np.rad2deg(h.y[:, 2]))
         axs[0].set_ylabel(r'$\omega(^\circ)$')
@@ -58,3 +62,5 @@ if st.button("Have a go!"):
         axs[1].set_xlabel('t(s)')
 
         st.pyplot(fig)
+    with st.expander("Raw data"):
+        st.dataframe(data)

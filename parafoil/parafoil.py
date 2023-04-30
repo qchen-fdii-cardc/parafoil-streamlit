@@ -21,7 +21,7 @@ class Trajectory:
 
     @property
     def time(self) -> Iterable:
-        return self.hist.keys()
+        return np.asarray(sorted(self.hist.keys()))
 
     @property
     def y(self) -> Iterable:
