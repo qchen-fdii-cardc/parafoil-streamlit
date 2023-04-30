@@ -2,7 +2,9 @@ import streamlit as st
 
 
 st.sidebar.markdown("""
-    # Parafoil Dynamics for Fun
+    - Parafoil Dynamics for Fun
+    - No serious business
+    - Have fun
     """)
 
 st.markdown("""
