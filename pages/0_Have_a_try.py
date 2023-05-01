@@ -2,7 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 import pandas as pd
+from datetime import datetime
 
+from dm import upload
 from parafoil.collocation import FitCollocationStrategy
 from parafoil.parafoil import Parafoil
 from parafoil.utils import max_rand_vec
@@ -27,6 +29,12 @@ if st.button("Have a go!"):
 
     data = pd.DataFrame(np.vstack((h.time, h.y.T, h.dydt.T, h.height, h.u)).T,
                         columns=['t', 'x', 'y', 'omega', 'dx', 'dy', 'domega', 'height', 'u'])
+    fn = f"parafoil_{int(datetime.now().timestamp() * 1e6)}.csv"
+    data.to_csv(fn, index=False)
+    try:
+        upload(st.secrets["DB_USERNAME"], st.secrets["DB_PASS"], fn, f"~/para_data/{fn}")
+    except:
+        pass
 
     data.loc[:, 'omega'] = data.loc[:, 'omega'].apply(np.rad2deg)
     data.loc[:, 'domega'] = data.loc[:, 'domega'].apply(np.rad2deg)
