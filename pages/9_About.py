@@ -8,6 +8,16 @@ st.sidebar.markdown("""
     """)
 
 st.markdown("""
-            - Parafoil Dynamics for Fun
+            Parafoil Dynamics for Fun
+            =====================               
+            
             - by Qin Chen, Xing-long Gao
+            
+            Plan：
+            - 6-DOF Parafoil Dynamics
+            - 9-DOF Parafoil Dynamics
+            - Let user control collocation
+            - evaulate the performance of collocation
+            - Wind model
+            
             """)
