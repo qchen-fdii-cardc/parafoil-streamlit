@@ -34,7 +34,7 @@ if st.button("Have a go!"):
     try:
         upload(st.secrets["DB_USERNAME"], st.secrets["DB_PASS"], fn, f"~/para_data/{fn}")
     except:
-        pass
+        print("Upload failed")
 
     data.loc[:, 'omega'] = data.loc[:, 'omega'].apply(np.rad2deg)
     data.loc[:, 'domega'] = data.loc[:, 'domega'].apply(np.rad2deg)
