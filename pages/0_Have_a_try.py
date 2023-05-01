@@ -29,12 +29,6 @@ if st.button("Have a go!"):
 
     data = pd.DataFrame(np.vstack((h.time, h.y.T, h.dydt.T, h.height, h.u)).T,
                         columns=['t', 'x', 'y', 'omega', 'dx', 'dy', 'domega', 'height', 'u'])
-    fn = f"parafoil_{int(datetime.now().timestamp() * 1e6)}.csv"
-    data.to_csv(fn, index=False)
-    try:
-        upload(st.secrets["DB_USERNAME"], st.secrets["DB_PASS"], fn, f"~/para_data/{fn}")
-    except:
-        print("Upload failed")
 
     data.loc[:, 'omega'] = data.loc[:, 'omega'].apply(np.rad2deg)
     data.loc[:, 'domega'] = data.loc[:, 'domega'].apply(np.rad2deg)
@@ -73,3 +67,10 @@ if st.button("Have a go!"):
     with st.expander("Raw data"):
         st.download_button("Download current data", data.to_csv().encode('utf-8'), 'parafoil.csv', 'text/csv')
         st.dataframe(data)
+
+    fn = f"parafoil_{int(datetime.now().timestamp() * 1e6)}.csv"
+    data.to_csv(fn, index=False)
+    try:
+        upload(st.secrets["DB_USERNAME"], st.secrets["DB_PASS"], fn, f"~/para_data/{fn}")
+    except:
+        print("Upload failed")
